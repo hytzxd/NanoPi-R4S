@@ -25,7 +25,7 @@ env:
   KMODS_IN_FIRMWARE: true
   UPLOAD_WETRANSFER: true
   UPLOAD_COWTRANSFER: true
-  UPLOAD_RELEASE: true
+  UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -93,6 +93,12 @@ jobs:
             echo "CONFIG_ALL_KMODS=y" >> .config
         fi
         make defconfig
+
+        sed -i "s/CONFIG_TARGET_ARCH_PACKAGES=\"aarch64_generic\"/CONFIG_TARGET_ARCH_PACKAGES=\"aarch64_cortex-a72\"/" .config
+        sed -i "s/CONFIG_DEFAULT_TARGET_OPTIMIZATION=\"-Os -pipe -mcpu=generic\"/CONFIG_DEFAULT_TARGET_OPTIMIZATION=\"-Os -pipe -mcpu=cortex-a72.cortex-a53\"/" .config
+        sed -i "s/CONFIG_CPU_TYPE=\"generic\"/CONFIG_CPU_TYPE=\"cortex-a72.cortex-a53\"/" .config
+        sed -i "s/CONFIG_TARGET_OPTIMIZATION=\"-Os -pipe -mcpu=generic\"/CONFIG_TARGET_OPTIMIZATION=\"-Os -pipe -mcpu=cortex-a72.cortex-a53\"/" .config
+
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
