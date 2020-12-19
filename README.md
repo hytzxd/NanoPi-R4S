@@ -10,7 +10,7 @@
 * 欢迎共同完善本固件
 
 ## 说明
-* 管理 IP: 192.168.1.1 (OpenWrt); 192.168.2.1 (FriendlyWrt)
+* 管理 IP: 192.168.2.1
 * 默认管理密码: password
 * Lean / Official OpenWrt 目前每次重启会随机更改网卡的MAC地址
 ### 分区扩容（ext4）
