@@ -1,10 +1,10 @@
-From 1b64ed24489b7010b036d900c0c5630729e8d83b Mon Sep 17 00:00:00 2001
+From b2bd4b1921ab46273a894d490b328f2ae3f5824b Mon Sep 17 00:00:00 2001
 From: LewiVir <lewivir@163.com>
-Date: Sat, 19 Dec 2020 17:25:50 +0800
-Subject: [PATCH] Add R4S Support
+Date: Thu, 17 Dec 2020 17:39:19 +0800
+Subject: [PATCH] Add R4S support
 
 ---
- package/boot/uboot-rockchip/Makefile          |  33 +++
+ package/boot/uboot-rockchip/Makefile          |  39 ++-
  ...-rockchip-add-support-for-NanoPi-R4S.patch | 227 ++++++++++++++++++
  ...oot-rockchip-add-NanoPi-R4S-1Gb-DDR3.patch | 105 ++++++++
  .../armv8/base-files/etc/board.d/01_leds      |   3 +-
@@ -14,7 +14,7 @@ Subject: [PATCH] Add R4S Support
  .../rockchip/image/nanopi-r4s.bootscript      |   8 +
  .../110-rockchip-add-NanoPi-R4S-DTS.patch     | 162 +++++++++++++
  ...111-rockchip-add-NanoPi-R4S-1Gb-DDR3.patch |  27 +++
- 10 files changed, 606 insertions(+), 4 deletions(-)
+ 10 files changed, 609 insertions(+), 7 deletions(-)
  create mode 100644 package/boot/uboot-rockchip/patches/200-uboot-rockchip-add-support-for-NanoPi-R4S.patch
  create mode 100644 package/boot/uboot-rockchip/patches/201-uboot-rockchip-add-NanoPi-R4S-1Gb-DDR3.patch
  create mode 100644 target/linux/rockchip/image/nanopi-r4s.bootscript
@@ -22,9 +22,23 @@ Subject: [PATCH] Add R4S Support
  create mode 100644 target/linux/rockchip/patches-5.4/111-rockchip-add-NanoPi-R4S-1Gb-DDR3.patch
 
 diff --git a/package/boot/uboot-rockchip/Makefile b/package/boot/uboot-rockchip/Makefile
-index d460e3723..011fd14c5 100644
+index d460e3723..b8c618119 100644
 --- a/package/boot/uboot-rockchip/Makefile
 +++ b/package/boot/uboot-rockchip/Makefile
+@@ -5,10 +5,10 @@
+ include $(TOPDIR)/rules.mk
+ include $(INCLUDE_DIR)/kernel.mk
+ 
+-PKG_VERSION:=2020.07
+-PKG_RELEASE:=3
++PKG_VERSION:=2020.10
++PKG_RELEASE:=1
+ 
+-PKG_HASH:=c1f5bf9ee6bb6e648edbf19ce2ca9452f614b08a9f886f1a566aa42e8cf05f6a
++PKG_HASH:=0d481bbdc05c0ee74908ec2f56a6daa53166cc6a78a0e4fac2ac5d025770a622
+ 
+ PKG_MAINTAINER:=Tobias Maedel <openwrt@tbspace.de>
+ 
 @@ -38,6 +38,36 @@ endef
  
  # RK3399 boards
