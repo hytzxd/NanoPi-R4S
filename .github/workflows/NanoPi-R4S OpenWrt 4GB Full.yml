@@ -19,13 +19,14 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: configs/official/r4s-official-full.config
+  # CONFIG_FILE: configs/official/r4s-official-full.config
+  CONFIG_FILE: configs/lean/r4s-lean-openwrt-full.config
   DIY_SH: scripts/official-full.sh
   IPV6MOD_IN_FIRMWARE: true
   KMODS_IN_FIRMWARE: true
   UPLOAD_WETRANSFER: true
   UPLOAD_COWTRANSFER: true
-  UPLOAD_RELEASE: true
+  UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
 
 jobs:
