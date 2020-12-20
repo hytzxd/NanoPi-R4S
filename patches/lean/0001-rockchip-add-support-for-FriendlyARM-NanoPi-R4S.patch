@@ -1,18 +1,18 @@
-From e2d738020bda284a4422459bc1e5eff70f2e591f Mon Sep 17 00:00:00 2001
+From f066f0f30f2c4344c268b59f289d7804df0be310 Mon Sep 17 00:00:00 2001
 From: LewiVir <lewivir@163.com>
-Date: Sun, 20 Dec 2020 19:36:59 +0800
+Date: Mon, 21 Dec 2020 00:39:43 +0800
 Subject: [PATCH 1/3] rockchip: add support for FriendlyARM NanoPi R4S
 
 ---
  package/boot/uboot-rockchip/Makefile          |  33 ++
  ...Add-support-for-FriendlyARM-NanoPi-R.patch | 392 ++++++++++++++++++
- .../armv8/base-files/etc/board.d/01_leds      |   4 +-
+ .../armv8/base-files/etc/board.d/01_leds      |   3 +-
  .../armv8/base-files/etc/board.d/02_network   |   9 +-
  .../etc/hotplug.d/net/40-net-smp-affinity     |   7 +-
  target/linux/rockchip/image/armv8.mk          |  33 +-
  .../rockchip/image/nanopi-r4s.bootscript      |   8 +
  ...Add-support-for-FriendlyARM-NanoPi-R.patch | 207 +++++++++
- 8 files changed, 689 insertions(+), 4 deletions(-)
+ 8 files changed, 688 insertions(+), 4 deletions(-)
  create mode 100644 package/boot/uboot-rockchip/patches/200-rockchip-rk3399-Add-support-for-FriendlyARM-NanoPi-R.patch
  create mode 100644 target/linux/rockchip/image/nanopi-r4s.bootscript
  create mode 100644 target/linux/rockchip/patches-5.4/200-rockchip-rk3399-Add-support-for-FriendlyARM-NanoPi-R.patch
@@ -70,7 +70,7 @@ index d460e3723..2f0004f34 100644
  
 diff --git a/package/boot/uboot-rockchip/patches/200-rockchip-rk3399-Add-support-for-FriendlyARM-NanoPi-R.patch b/package/boot/uboot-rockchip/patches/200-rockchip-rk3399-Add-support-for-FriendlyARM-NanoPi-R.patch
 new file mode 100644
-index 000000000..13395da1f
+index 000000000..aa285e996
 --- /dev/null
 +++ b/package/boot/uboot-rockchip/patches/200-rockchip-rk3399-Add-support-for-FriendlyARM-NanoPi-R.patch
 @@ -0,0 +1,392 @@
@@ -114,7 +114,7 @@ index 000000000..13395da1f
 +
 +--- a/arch/arm/dts/Makefile
 ++++ b/arch/arm/dts/Makefile
-+@@ -132,6 +132,8 @@ dtb-$(CONFIG_ROCKCHIP_RK3399) += \
++@@ -130,6 +130,8 @@ dtb-$(CONFIG_ROCKCHIP_RK3399) += \
 + 	rk3399-nanopi-m4.dtb \
 + 	rk3399-nanopi-m4-2gb.dtb \
 + 	rk3399-nanopi-neo4.dtb \
@@ -467,17 +467,16 @@ index 000000000..13395da1f
 ++CONFIG_ERRNO_STR=y
 +
 diff --git a/target/linux/rockchip/armv8/base-files/etc/board.d/01_leds b/target/linux/rockchip/armv8/base-files/etc/board.d/01_leds
-index bba3e2aa5..944a1a1d1 100755
+index bba3e2aa5..77655d426 100755
 --- a/target/linux/rockchip/armv8/base-files/etc/board.d/01_leds
 +++ b/target/linux/rockchip/armv8/base-files/etc/board.d/01_leds
-@@ -9,7 +9,9 @@ boardname="${board##*,}"
+@@ -9,7 +9,8 @@ boardname="${board##*,}"
  board_config_update
  
  case $board in
 -friendlyarm,nanopi-r2s)
 +friendlyarm,nanopi-r2s|\
-+friendlyarm,nanopi-r4s-1gb|\
-+friendlyarm,nanopi-r4s-4gb)
++friendlyarm,nanopi-r4s)
  	ucidef_set_led_netdev "wan" "WAN" "$boardname:green:wan" "eth0"
  	ucidef_set_led_netdev "lan" "LAN" "$boardname:green:lan" "eth1"
  	;;

@@ -1,6 +1,6 @@
-From de6f5698b5b26b360545f2521c210a2f86b4033b Mon Sep 17 00:00:00 2001
+From e7e053cfa41cad012c59265ea3d711f5f4caf9aa Mon Sep 17 00:00:00 2001
 From: LewiVir <lewivir@163.com>
-Date: Sun, 20 Dec 2020 19:40:15 +0800
+Date: Mon, 21 Dec 2020 00:42:29 +0800
 Subject: [PATCH 3/3] rockchip: use vendor driver for NanoPi R4S
 
 ---
