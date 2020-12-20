@@ -10,7 +10,7 @@
 * 推荐 Lean OpenWrt SquashFS 版本
 * 管理 IP: 192.168.2.1
 * 默认管理密码: password
-* 添加超频指南 `configs/overclock`
+* 添加[超频指南](https://github.com/LewiVir/NanoPi-R4S/blob/main/configs/overclock/OVERCLOCK.md)
 * [分区扩容指南](https://mlapp.cn/1011.html)
 * Lean / Official OpenWrt 目前每次重启会随机更改网卡的MAC地址
 
