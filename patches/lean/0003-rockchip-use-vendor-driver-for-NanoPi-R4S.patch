@@ -1,0 +1,25 @@
+From de6f5698b5b26b360545f2521c210a2f86b4033b Mon Sep 17 00:00:00 2001
+From: LewiVir <lewivir@163.com>
+Date: Sun, 20 Dec 2020 19:40:15 +0800
+Subject: [PATCH 3/3] rockchip: use vendor driver for NanoPi R4S
+
+---
+ target/linux/rockchip/image/armv8.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/linux/rockchip/image/armv8.mk b/target/linux/rockchip/image/armv8.mk
+index 902b8f452..1dd12a9cf 100644
+--- a/target/linux/rockchip/image/armv8.mk
++++ b/target/linux/rockchip/image/armv8.mk
+@@ -20,7 +20,7 @@ define Device/friendlyarm_nanopi-r4s
+   DEVICE_MODEL := NanoPi R4S
+   SOC := rk3399
+   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r4s | pine64-img | gzip | append-metadata
+-  DEVICE_PACKAGES := kmod-r8169
++  DEVICE_PACKAGES := kmod-r8168
+ endef
+ 
+ define Device/friendlyarm_nanopi-r4s-1gb
+-- 
+2.25.1
+
