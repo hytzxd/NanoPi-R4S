@@ -10,6 +10,7 @@
 * 推荐 Lean OpenWrt SquashFS 版本
 * 管理 IP: 192.168.2.1
 * 默认管理密码: password
+* 添加超频指南 `configs/overclock`
 * [分区扩容指南](https://mlapp.cn/1011.html)
 * Lean / Official OpenWrt 目前每次重启会随机更改网卡的MAC地址
 
@@ -18,7 +19,7 @@
 
 ## 特色
 ### 基于Lean OpenWrt和官方OpenWrt的固件
-请参考 [SuLingGG/OpenWrt-Rpi](https://github.com/SuLingGG/OpenWrt-Rpi)，本固件与之保持同步。
+请参考 [SuLingGG/OpenWrt-Rpi](https://github.com/SuLingGG/OpenWrt-Rpi)，本固件与之保持同步，大多数问题可在 [README.md](https://github.com/SuLingGG/OpenWrt-Rpi/blob/main/README.md) 中得到解答。
 
 ### 基于FriendlyWrt的固件
 * 支持 RTL8821CU/RTL8822BU 芯片的 USB WiFi 设备，已知支持列表：

@@ -1,0 +1,151 @@
+1.8G
+
+$ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_frequencies
+408000 600000 816000 1008000 1200000 1416000 
+408000 600000 816000 1008000 1200000 1416000 
+408000 600000 816000 1008000 1200000 1416000 
+408000 600000 816000 1008000 1200000 1416000 
+408000 600000 816000 1008000 1200000 1416000 1608000 1800000 
+408000 600000 816000 1008000 1200000 1416000 1608000 1800000
+
+$ coremark
+38168.766672
+
+$ openssl speed -evp aes-256-gcm
+Doing aes-256-gcm for 3s on 16 size blocks: 25656414 aes-256-gcm's in 2.99s
+Doing aes-256-gcm for 3s on 64 size blocks: 18394238 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 256 size blocks: 8039751 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 1024 size blocks: 2467998 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 8192 size blocks: 330542 aes-256-gcm's in 2.99s
+Doing aes-256-gcm for 3s on 16384 size blocks: 165322 aes-256-gcm's in 3.00s
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+aes-256-gcm     137291.85k   392410.41k   686058.75k   842409.98k   905618.75k   902878.55k
+
+$ openssl speed -evp chacha20-poly1305
+Doing chacha20-poly1305 for 3s on 16 size blocks: 14559948 chacha20-poly1305's in 2.99s
+Doing chacha20-poly1305 for 3s on 64 size blocks: 6459071 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 256 size blocks: 3036591 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 1024 size blocks: 892060 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 8192 size blocks: 116098 chacha20-poly1305's in 2.99s
+Doing chacha20-poly1305 for 3s on 16384 size blocks: 58287 chacha20-poly1305's in 3.00s
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+chacha20-poly1305    77912.77k   137793.51k   259122.43k   304489.81k   318085.22k   318324.74k
+
+$ openssl speed -multi 6 -evp aes-128-cbc
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+evp             819583.49k  2521955.07k  4120260.01k  6244336.64k  6883087.70k  6935281.66k
+
+
+2.0G
+
+$ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_frequencies
+408000 600000 816000 1008000 1200000 1416000 1512000 
+408000 600000 816000 1008000 1200000 1416000 1512000 
+408000 600000 816000 1008000 1200000 1416000 1512000 
+408000 600000 816000 1008000 1200000 1416000 1512000 
+408000 600000 816000 1008000 1200000 1416000 1608000 1800000 1992000 
+408000 600000 816000 1008000 1200000 1416000 1608000 1800000 1992000 
+
+$ coremark
+41568.698770
+
+$ openssl speed -evp aes-256-gcm
+Doing aes-256-gcm for 3s on 16 size blocks: 27931716 aes-256-gcm's in 2.99s
+Doing aes-256-gcm for 3s on 64 size blocks: 20481091 aes-256-gcm's in 2.99s
+Doing aes-256-gcm for 3s on 256 size blocks: 8895261 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 1024 size blocks: 2728828 aes-256-gcm's in 2.99s
+Doing aes-256-gcm for 3s on 8192 size blocks: 362374 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 16384 size blocks: 182459 aes-256-gcm's in 2.99s
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+aes-256-gcm     149467.38k   438391.25k   759062.27k   934555.14k   989522.60k   999802.09k
+
+$ openssl speed -evp chacha20-poly1305
+Doing chacha20-poly1305 for 3s on 16 size blocks: 16011635 chacha20-poly1305's in 2.99s
+Doing chacha20-poly1305 for 3s on 64 size blocks: 7144029 chacha20-poly1305's in 2.99s
+Doing chacha20-poly1305 for 3s on 256 size blocks: 3359429 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 1024 size blocks: 994885 chacha20-poly1305's in 2.99s
+Doing chacha20-poly1305 for 3s on 8192 size blocks: 128629 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 16384 size blocks: 63665 chacha20-poly1305's in 2.99s
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+chacha20-poly1305    85680.99k   152915.67k   286671.27k   340723.16k   351242.92k   348858.65k
+
+$ openssl speed -multi 6 -evp aes-128-cbc
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+evp             901298.91k  2485291.46k  5176024.66k  6753026.73k  7477747.71k  7495751.00k
+
+
+2.2G
+
+$ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_frequencies
+408000 600000 816000 1008000 1200000 1416000 1512000 1800000 
+408000 600000 816000 1008000 1200000 1416000 1512000 1800000 
+408000 600000 816000 1008000 1200000 1416000 1512000 1800000 
+408000 600000 816000 1008000 1200000 1416000 1512000 1800000 
+408000 600000 816000 1008000 1200000 1416000 1608000 1800000 1992000 2208000 
+408000 600000 816000 1008000 1200000 1416000 1608000 1800000 1992000 2208000
+
+$ coremark
+45746.962116
+
+$ openssl speed -evp aes-256-gcm
+Doing aes-256-gcm for 3s on 16 size blocks: 31891726 aes-256-gcm's in 2.99s
+Doing aes-256-gcm for 3s on 64 size blocks: 22702217 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 256 size blocks: 9869050 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 1024 size blocks: 3026743 aes-256-gcm's in 2.99s
+Doing aes-256-gcm for 3s on 8192 size blocks: 404275 aes-256-gcm's in 3.00s
+Doing aes-256-gcm for 3s on 16384 size blocks: 202096 aes-256-gcm's in 2.99s
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+aes-256-gcm     170658.07k   484313.96k   842158.93k  1036583.56k  1103940.27k  1107404.97k
+
+$ openssl speed -evp chacha20-poly1305
+Doing chacha20-poly1305 for 3s on 16 size blocks: 17795455 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 64 size blocks: 7922251 chacha20-poly1305's in 2.99s
+Doing chacha20-poly1305 for 3s on 256 size blocks: 3723346 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 1024 size blocks: 1103114 chacha20-poly1305's in 2.99s
+Doing chacha20-poly1305 for 3s on 8192 size blocks: 142971 chacha20-poly1305's in 3.00s
+Doing chacha20-poly1305 for 3s on 16384 size blocks: 71748 chacha20-poly1305's in 3.00s
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+chacha20-poly1305    94909.09k   169573.27k   317725.53k   377788.87k   390406.14k   391839.74k
+
+$ openssl speed -multi 6 -evp aes-128-cbc
+OpenSSL 1.1.1i  8 Dec 2020
+built on: Fri Dec 18 17:43:29 2020 UTC
+options:bn(64,64) rc4(char) des(int) aes(partial) blowfish(ptr) 
+compiler: aarch64-openwrt-linux-musl-gcc -fPIC -pthread -Wa,--noexecstack -Wall -O3 -pipe -mcpu=cortex-a72.cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -O3 -fpic -ffunction-sections -fdata-sections -znow -zrelro -DOPENSSL_USE_NODELETE -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DVPAES_ASM -DECP_NISTZ256_ASM -DPOLY1305_ASM -DNDEBUG
+evp            1028133.56k  2677641.11k  5369793.37k  7425038.68k  8192947.54k  8224489.47k
